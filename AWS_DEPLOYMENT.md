@@ -48,7 +48,7 @@ chmod +x scripts/*.sh
 ### 4. Configure Environment Variables
 
 ```bash
-# Run the environment setup script
+# Run the environment setup script (from repository root)
 ./scripts/setup-env.sh
 
 # Edit the .env file with your actual values

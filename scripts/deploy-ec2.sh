@@ -5,8 +5,14 @@
 
 echo "🚀 Deploying CampusShare to EC2..."
 
-# Navigate to application directory
-cd /var/www/campus-share
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+echo "📁 Project root: $PROJECT_ROOT"
+
+# Navigate to project root
+cd "$PROJECT_ROOT"
 
 # Pull latest changes from Git
 echo "📥 Pulling latest changes from Git..."
@@ -20,7 +26,7 @@ npm run install:all
 echo "🔨 Building frontend..."
 cd frontend
 npm run build:prod
-cd ..
+cd "$PROJECT_ROOT"
 
 # Restart backend with PM2
 echo "🔄 Restarting backend..."
@@ -28,7 +34,7 @@ cd backend
 pm2 delete campus-share-backend 2>/dev/null || true
 pm2 start server.js --name "campus-share-backend" --env production
 pm2 save
-cd ..
+cd "$PROJECT_ROOT"
 
 # Reload Nginx
 echo "🌐 Reloading Nginx..."

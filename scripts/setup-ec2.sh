@@ -107,8 +107,11 @@ cat > /var/www/campus-share/setup-env.sh <<'EOF'
 #!/bin/bash
 echo "🔐 Setting up environment variables..."
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Create .env file for backend
-cat > /var/www/campus-share/backend/.env <<'ENVEOF'
+cat > "$SCRIPT_DIR/backend/.env" <<'ENVEOF'
 NODE_ENV=production
 PORT=8000
 JWT_SECRET=your_super_secure_jwt_secret_here
@@ -118,7 +121,7 @@ AWS_REGION=your_aws_region
 AWS_S3_BUCKET_NAME=campus-share-bucket
 ENVEOF
 
-echo "✅ Environment file created at /var/www/campus-share/backend/.env"
+echo "✅ Environment file created at $SCRIPT_DIR/backend/.env"
 echo "⚠️  Please update the .env file with your actual AWS credentials!"
 EOF
 

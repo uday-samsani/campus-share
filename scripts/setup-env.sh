@@ -5,8 +5,14 @@
 
 echo "🔐 Setting up environment variables for CampusShare..."
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+echo "📁 Project root: $PROJECT_ROOT"
+
 # Create .env file for backend
-cat > backend/.env << 'EOF'
+cat > "$PROJECT_ROOT/backend/.env" << 'EOF'
 NODE_ENV=production
 PORT=8000
 JWT_SECRET=your_super_secure_jwt_secret_here_change_this_in_production
@@ -16,7 +22,7 @@ AWS_REGION=us-east-1
 AWS_S3_BUCKET_NAME=campus-share-bucket
 EOF
 
-echo "✅ Environment file created at backend/.env"
+echo "✅ Environment file created at $PROJECT_ROOT/backend/.env"
 echo ""
 echo "⚠️  IMPORTANT: Please update the .env file with your actual values:"
 echo "   - JWT_SECRET: Generate a secure random string"
