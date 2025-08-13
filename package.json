@@ -1,0 +1,25 @@
+{
+  "name": "campus-share",
+  "version": "1.0.0",
+  "description": "Student Resource Sharing Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "build:prod": "cd frontend && npm run build:prod",
+    "install:all": "npm install && cd backend && npm install && cd frontend && npm install",
+    "start": "cd backend && npm start",
+    "deploy:aws": "npm run build:prod && npm run deploy:ec2",
+    "deploy:ec2": "bash scripts/deploy-ec2.sh",
+    "setup:ec2": "bash scripts/setup-ec2.sh",
+    "env:setup": "bash scripts/setup-env.sh"
+  },
+  "keywords": ["campus", "sharing", "marketplace", "students"],
+  "author": "CampusShare Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
